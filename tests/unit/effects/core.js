@@ -29,7 +29,7 @@ QUnit.assert.notPresent = function( value, array, message ) {
 };
 
 // MinDuration is used for "short" animate tests where we are only concerned about the final
-var minDuration = 15,
+var minDuration = 60,
 
 	// Duration is used for "long" animates where we plan on testing properties during animation
 	duration = 200;
@@ -206,9 +206,13 @@ QUnit.test( "animateClass clears style properties when stopped", function( asser
 	test.addClass( "testChangeBackground", duration );
 	assert.notEqual( orig, style.cssText, "cssText is not the same after starting animation" );
 
-	test.stop( true, true );
-	assert.equal( orig, $.trim( style.cssText ), "cssText is the same after stopping animation midway" );
-	ready();
+	test
+		.stop( true, true )
+		.promise()
+		.then( function() {
+			assert.equal( orig, $.trim( style.cssText ), "cssText is the same after stopping animation midway" );
+			ready();
+		} );
 } );
 
 QUnit.test( "animateClass: css and class changes during animation are not lost (#7106)",
@@ -328,7 +332,7 @@ $.each( $.effects.effect, function( effect ) {
 
 		function duringTest( fn ) {
 			return function( next ) {
-				setTimeout( fn );
+				setTimeout( fn, minDuration / 2 );
 				next();
 			};
 		}

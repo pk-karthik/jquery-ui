@@ -7,18 +7,18 @@ var
 	coreFiles = [
 		"core.js",
 		"widget.js",
-		"mouse.js",
-		"draggable.js",
-		"droppable.js",
-		"resizable.js",
-		"selectable.js",
-		"sortable.js",
+		"widgets/mouse.js",
+		"widgets/draggable.js",
+		"widgets/droppable.js",
+		"widgets/resizable.js",
+		"widgets/selectable.js",
+		"widgets/sortable.js",
 		"effect.js"
 	],
 
 	uiFiles = coreFiles.map(function( file ) {
 		return "ui/" + file;
-	}).concat( expandFiles( "ui/*.js" ).filter(function( file ) {
+	}).concat( expandFiles( "ui/**/*.js" ).filter(function( file ) {
 		return coreFiles.indexOf( file.substring( 3 ) ) === -1;
 	}) ),
 
@@ -281,7 +281,7 @@ grunt.initConfig({
 				"jshint/LICENSE": "jshint/LICENSE",
 
 				"jquery/jquery.js": "jquery-1.x/dist/jquery.js",
-				"jquery/MIT-LICENSE.txt": "jquery-1.x/MIT-LICENSE.txt",
+				"jquery/LICENSE.txt": "jquery-1.x/LICENSE.txt",
 
 				"jquery-1.7.0/jquery.js": "jquery-1.7.0/jquery.js",
 				"jquery-1.7.0/MIT-LICENSE.txt": "jquery-1.7.0/MIT-LICENSE.txt",
@@ -386,7 +386,16 @@ grunt.initConfig({
 				"jquery-2.2.3/LICENSE.txt": "jquery-2.2.3/LICENSE.txt",
 
 				"jquery-2.2.4/jquery.js": "jquery-2.2.4/dist/jquery.js",
-				"jquery-2.2.4/LICENSE.txt": "jquery-2.2.4/LICENSE.txt"
+				"jquery-2.2.4/LICENSE.txt": "jquery-2.2.4/LICENSE.txt",
+
+				"jquery-3.0.0/jquery.js": "jquery-3.0.0/dist/jquery.js",
+				"jquery-3.0.0/LICENSE.txt": "jquery-3.0.0/LICENSE.txt",
+
+				"jquery-3.1.0/jquery.js": "jquery-3.1.0/dist/jquery.js",
+				"jquery-3.1.0/LICENSE.txt": "jquery-3.1.0/LICENSE.txt",
+
+				"jquery-3.1.1/jquery.js": "jquery-3.1.1/dist/jquery.js",
+				"jquery-3.1.1/LICENSE.txt": "jquery-3.1.1/LICENSE.txt"
 			}
 		}
 	},
@@ -432,9 +441,7 @@ grunt.registerTask( "update-authors", function() {
 		}
 
 		authors = authors.map(function( author ) {
-			if ( author.match( /^Dan Strohl </ ) ) {
-				return "Dan Strohl";
-			} else if ( author.match( /^Jacek Jędrzejewski </ ) ) {
+			if ( author.match( /^Jacek Jędrzejewski </ ) ) {
 				return "Jacek Jędrzejewski (http://jacek.jedrzejewski.name)";
 			} else if ( author.match( /^Pawel Maruszczyk </ ) ) {
 				return "Pawel Maruszczyk (http://hrabstwo.net)";

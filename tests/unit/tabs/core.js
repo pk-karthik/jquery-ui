@@ -101,7 +101,7 @@ QUnit.test( "aria-controls", function( assert ) {
 } );
 
 QUnit.test( "accessibility", function( assert ) {
-	assert.expect( 49 );
+	assert.expect( 46 );
 	var element = $( "#tabs1" ).tabs( {
 			active: 1,
 			disabled: [ 2 ]
@@ -118,7 +118,6 @@ QUnit.test( "accessibility", function( assert ) {
 			panel = panels.eq( index );
 		assert.equal( tab.attr( "role" ), "tab", "tab " + index + " role" );
 		assert.equal( tab.attr( "aria-labelledby" ), anchorId, "tab " + index + " aria-labelledby" );
-		assert.equal( anchor.attr( "role" ), "presentation", "anchor " + index + " role" );
 		assert.equal( anchor.attr( "tabindex" ), -1, "anchor " + index + " tabindex" );
 		assert.equal( panel.attr( "role" ), "tabpanel", "panel " + index + " role" );
 		assert.equal( panel.attr( "aria-labelledby" ), anchorId, "panel " + index + " aria-labelledby" );
@@ -645,18 +644,6 @@ QUnit.test( "keyboard support - CTRL+UP, ALT+PAGE_DOWN, ALT+PAGE_UP", function( 
 	}
 
 	setTimeout( step1 );
-} );
-
-QUnit.test( "#3627 - Ajax tab with url containing a fragment identifier fails to load", function( assert ) {
-	assert.expect( 1 );
-
-	$( "#tabs2" ).tabs( {
-		active: 2,
-		beforeLoad: function( event, ui ) {
-			event.preventDefault();
-			assert.ok( /test.html$/.test( ui.ajaxSettings.url ), "should ignore fragment identifier" );
-		}
-	} );
 } );
 
 QUnit.test( "#4033 - IE expands hash to full url and misinterprets tab as ajax", function( assert ) {
